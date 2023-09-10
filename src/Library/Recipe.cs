@@ -25,14 +25,20 @@ namespace Full_GRASP_And_SOLID.Library
             this.steps.Remove(step);
         }
 
-        public void PrintRecipe()
+        public IEnumerable GetSteps() 
+        /*
+        Se agrega este método para poder acceder a cada uno de los pasos de la 
+        receta desde la clase ConsolePrinter.
+        IEnumerable se utiliza para poder iterar sobre una secuencia de elementos,
+        en este caso, la lista steps.
+        */
         {
-            Console.WriteLine($"Receta de {this.FinalProduct.Description}:");
             foreach (Step step in this.steps)
             {
-                Console.WriteLine($"{step.Quantity} de '{step.Input.Description}' " +
-                    $"usando '{step.Equipment.Description}' durante {step.Time}");
+                yield return this.steps;
+                //yield se utiliza para poder retornar los objetos de la secuencia.
             }
         }
+
     }
 }
